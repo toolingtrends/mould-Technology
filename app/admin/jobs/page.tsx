@@ -130,14 +130,26 @@ export default function AdminJobsPage() {
       <div className="max-w-7xl mx-auto">
 
         {/* HEADER */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Job Management
-          </h1>
-          <p className="text-gray-600">
-            Manage all job listings across companies
-          </p>
-        </div>
+       {/* HEADER */}
+<div className="mb-8 flex justify-between items-center">
+  <div>
+    <h1 className="text-3xl font-bold text-gray-900 mb-2">
+      Job Management
+    </h1>
+    <p className="text-gray-600">
+      Manage all job listings across companies
+    </p>
+  </div>
+
+  <div>
+   <a
+  href="/admin/jobs/create"
+  className="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white px-6 py-2.5 rounded-lg shadow-md hover:shadow-lg transition font-medium"
+>
+  + Create Job
+</a>
+  </div>
+</div>
 
         {/* STATS */}
         <div className="grid md:grid-cols-3 gap-6 mb-6">

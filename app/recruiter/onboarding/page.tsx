@@ -106,7 +106,7 @@ export default function RecruiterOnboardingPage() {
     <div className="min-h-screen bg-[#f3f2ef] flex items-center justify-center px-4">
       <div className="bg-white max-w-xl w-full rounded-lg shadow-sm p-8">
         <h1 className="text-2xl font-bold mb-2">
-          Let’s set up your recruiter profile
+          Let’s set up your Company profile
         </h1>
         <p className="text-sm text-gray-600 mb-6">
           This helps candidates trust you and your company

@@ -181,7 +181,7 @@ if (user?.role !== "admin") {
     />
 
      <SidebarLink
-      href="/admin/mmt-chats"
+      href="/admin/industry-talks"
       label="Industary Talks"
       icon={<Folder size={18} />}
       active={pathname === "/admin/mmt-chats"}

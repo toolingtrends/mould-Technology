@@ -95,11 +95,18 @@ export default function AdminDirectoriesPage() {
 
   <div className="flex gap-3">
     {/* OLD BUTTON */}
-    <Link
+    {/* <Link
       href="/admin/directories/company-dashboard"
       className="bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition"
     >
       + Create Supplier
+    </Link> */}
+
+    <Link
+      href="/admin/directories/bulk-upload"
+      className="bg-blue-600 text-white px-5 py-2 rounded-lg shadow hover:bg-blue-700 transition"
+    >
+      + Bulk Supplier Creation
     </Link>
 
     {/* ✅ NEW BUTTON */}
