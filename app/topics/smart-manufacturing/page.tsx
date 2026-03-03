@@ -1,9 +1,8 @@
 import Link from "next/link"
-import EngineerListing from "@/components/topics/EngineerListing"
 import type { Post } from "@/types/Post"
 import TopicListing from "@/components/topics/TopicListing"
 
-export default async function EngineerPage() {
+export default async function SmartManufacturingPage() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/posts?limit=50`,
     { cache: "no-store" }
@@ -22,9 +21,9 @@ export default async function EngineerPage() {
     .filter((p) => slugOf(p).includes("whatsnew"))
     .slice(0, 5)
 
-  // ================= ENGINEER POSTS =================
-  const engineerPosts = posts.filter(
-    (p) => slugOf(p) === "engineer"
+  // ================= BUILD POSTS =================
+  const managePosts = posts.filter(
+    (p) => slugOf(p) === "smartmanufacturing"
   )
 
   return (
@@ -40,29 +39,28 @@ export default async function EngineerPage() {
                 href={`/post/${post.slug}`}
                 className="group"
               >
-             {/* BADGE + DATE */}
-<div className="flex items-center gap-3 mb-1">
-  {(post.badge || post.category) && (
-    <span className="bg-[#0072BC] text-white text-[10px] font-bold px-2 py-[2px] uppercase">
-      {post.badge
+                {/* BADGE + DATE */}
+                <div className="flex items-center gap-3 mb-1">
+                    {(post.badge || post.category) && (
+                  <span className="bg-[#0072BC] text-white text-[10px] font-bold px-2 py-[2px] uppercase">
+                    {post.badge
         ? post.badge
         : typeof post.category === "object"
         ? post.category?.name
         : post.category}
-    </span>
-  )}
+                  </span>
+                )}
 
-  <span className="text-xs text-gray-500">
-    {post.publishedAt
-      ? new Date(post.publishedAt).toLocaleDateString("en-US", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        })
-      : ""}
-  </span>
-</div>
-
+                  <span className="text-xs text-gray-500">
+                    {post.publishedAt
+                      ? new Date(post.publishedAt).toLocaleDateString("en-US", {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        })
+                      : ""}
+                  </span>
+                </div>
 
                 {/* TITLE */}
                 <p className="text-sm font-semibold text-gray-900 leading-snug group-hover:text-[#C70000]">
@@ -74,12 +72,12 @@ export default async function EngineerPage() {
         </div>
       </section>
 
-      {/* ================= ENGINEER PAGE CONTENT ================= */}
+      {/* ================= BUILD PAGE CONTENT ================= */}
      <TopicListing
-  posts={engineerPosts}
-  title="Engineering For Toolmaking"
-  description="Strategies to de-risk launches through part and Toolingsimulation, additive manufacturing or conformal cooling, and troubleshooting during tool validation."
-  sectionTitle="Latest Engineer Articles"
+  posts={managePosts}
+  title="Smart Manufacturing"
+  description="Strategies and best practices for implementing smart manufacturing technologies in tooling and production environments."
+  sectionTitle="Latest Smart Manufacturing Articles"
 />
 
 

@@ -32,7 +32,7 @@ text-black">
             <div className="text-center sm:text-left">
               <Link href="/" className="inline-block mb-4">
                 <Image
-                  src="/images/tooling-white.png"
+                  src="/images/tooling new34 (1).png"
                   alt="Tooling Technology Logo"
                   width={200}
                   height={67}
@@ -190,7 +190,7 @@ text-black">
             <div className="lg:col-span-4">
               <Link href="/" className="inline-block mb-6">
                 <Image
-                  src="/images/tooling-white.png"
+                  src="/images/tooling new34 (1).png"
                   alt="Tooling Technology Logo"
                   width={240}
                   height={80}
@@ -250,7 +250,7 @@ text-black">
 
               {/* App Store Buttons - Desktop */}
               <div className="flex gap-3">
-                <Link href="#">
+                <Link href="/coming-soon" className="inline-block">
                   <Image
                     src="/images/google-play.png"
                     alt="Download on Google Play"
@@ -259,7 +259,7 @@ text-black">
                     className="hover:opacity-80 transition"
                   />
                 </Link>
-                <Link href="#">
+                <Link href="/coming-soon" className="inline-block">
                   <Image
                     src="/images/apple-store.png"
                     alt="Download on App Store"
@@ -277,10 +277,12 @@ text-black">
                 Topics
               </h5>
               <ul className="space-y-3 text-sm">
-                <li><Link href="/topics/engineer" className="hover:text-black hover:translate-x-1 inline-block transition-all">Engineer</Link></li>
-                <li><Link href="/topics/build" className="hover:text-black hover:translate-x-1 inline-block transition-all">Build</Link></li>
-                <li><Link href="/topics/maintain" className="hover:text-black hover:translate-x-1 inline-block transition-all">Maintain</Link></li>
-                <li><Link href="/topics/manage" className="hover:text-black hover:translate-x-1 inline-block transition-all">Manage</Link></li>
+                <li><Link href="/topics/machining" className="hover:text-black hover:translate-x-1 inline-block transition-all">Machining</Link></li>
+                <li><Link href="/topics/cutting-tools" className="hover:text-black hover:translate-x-1 inline-block transition-all">Cutting Tools</Link></li>
+                <li><Link href="/topics/surface-engineering" className="hover:text-black hover:translate-x-1 inline-block transition-all">Surface Engineering</Link></li>
+                <li><Link href="/topics/smart-manufacturing" className="hover:text-black hover:translate-x-1 inline-block transition-all">Smart Manufacturing</Link></li>
+                <li><Link href="/topics/advanced-manufacturing" className="hover:text-black hover:translate-x-1 inline-block transition-all">Advanced Manufacturing</Link></li>
+                <li><Link href="/topics/maintenance&operations" className="hover:text-black hover:translate-x-1 inline-block transition-all">Maintenance & Operations</Link></li>
                 <li><Link href="/topics" className="hover:text-black hover:translate-x-1 inline-block transition-all font-semibold">View All →</Link></li>
               </ul>
             </div>
@@ -327,7 +329,7 @@ text-black">
                 Calendar
               </h5>
               <ul className="space-y-3 text-sm">
-                <li><Link href="/webinars" className="hover:text-black hover:translate-x-1 inline-block transition-all">Webinars</Link></li>
+                {/* <li><Link href="/webinars" className="hover:text-black hover:translate-x-1 inline-block transition-all">Webinars</Link></li> */}
                 <li><Link href="/events" className="hover:text-black hover:translate-x-1 inline-block transition-all">Events</Link></li>
               </ul>
             </div>
@@ -352,12 +354,12 @@ text-black">
             </Link>
 
             <p className="text-center order-1 sm:order-2">
-              Copyright © 2026 <span className="font-semibold">Molding Trends</span>. All rights reserved.
+              Copyright © 2026 <span className="font-semibold">Tooling Trends</span>. All rights reserved.
             </p>
 
             <Link 
               href="/privacy-policy" 
-              className="hover:text-black transition-colors order-3"
+              className="hover:text-white transition-colors order-3"
             >
               Privacy Policy
             </Link>

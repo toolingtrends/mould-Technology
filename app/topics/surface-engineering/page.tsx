@@ -2,7 +2,7 @@ import Link from "next/link"
 import type { Post } from "@/types/Post"
 import TopicListing from "@/components/topics/TopicListing"
 
-export default async function MaintainPage() {
+export default async function SurfaceEngineerPage() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/posts?limit=50`,
     { cache: "no-store" }
@@ -22,8 +22,8 @@ export default async function MaintainPage() {
     .slice(0, 5)
 
   // ================= BUILD POSTS =================
-  const managePosts = posts.filter(
-    (p) => slugOf(p) === "manage"
+  const maintainPosts = posts.filter(
+    (p) => slugOf(p) === "surfaceengineering"
   )
 
   return (
@@ -42,14 +42,15 @@ export default async function MaintainPage() {
                 {/* BADGE + DATE */}
                 <div className="flex items-center gap-3 mb-1">
                     {(post.badge || post.category) && (
+
                   <span className="bg-[#0072BC] text-white text-[10px] font-bold px-2 py-[2px] uppercase">
-                    {post.badge
+                     {post.badge
         ? post.badge
         : typeof post.category === "object"
         ? post.category?.name
         : post.category}
                   </span>
-                )}
+                    )}
 
                   <span className="text-xs text-gray-500">
                     {post.publishedAt
@@ -74,10 +75,10 @@ export default async function MaintainPage() {
 
       {/* ================= BUILD PAGE CONTENT ================= */}
      <TopicListing
-  posts={managePosts}
-  title="Managing For Toolmaking"
-  description="Processes, best practices, and tooling strategies used to build, validate, and launch production molds."
-  sectionTitle="Latest Build Articles"
+  posts={maintainPosts}
+  title="Surface Engineering"
+  description="Techniques and best practices for surface engineering in tooling and manufacturing."
+  sectionTitle="Latest Surface Engineering Articles"
 />
 
 

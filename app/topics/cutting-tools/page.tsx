@@ -2,7 +2,7 @@ import Link from "next/link"
 import type { Post } from "@/types/Post"
 import TopicListing from "@/components/topics/TopicListing"
 
-export default async function BuildPage() {
+export default async function CuttingToolsPage() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/posts?limit=50`,
     { cache: "no-store" }
@@ -23,7 +23,7 @@ export default async function BuildPage() {
 
   // ================= BUILD POSTS =================
   const buildPosts = posts.filter(
-    (p) => slugOf(p) === "build"
+    (p) => slugOf(p) === "cuttingtools"
   )
 
   return (
@@ -75,9 +75,9 @@ export default async function BuildPage() {
       {/* ================= BUILD PAGE CONTENT ================= */}
      <TopicListing
   posts={buildPosts}
-  title="Build For Toolmaking"
-  description="Processes, best practices, and tooling strategies used to build, validate, and launch production molds."
-  sectionTitle="Latest Build Articles"
+  title="Cutting Tools"
+  description="Best practices and strategies for selecting, using, and maintaining cutting tools in tooling and manufacturing."
+  sectionTitle="Latest Cutting Tools Articles"
 />
 
 

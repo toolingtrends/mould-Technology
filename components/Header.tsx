@@ -42,6 +42,10 @@ export default function Header() {
   const [openUserMenu, setOpenUserMenu] = useState(false)
 
   const [allPosts, setAllPosts] = useState<Post[]>([])
+  const [events, setEvents] = useState<any[]>([])
+  const [suppliers, setSuppliers] = useState<any[]>([])
+  
+
   const [activeSlug, setActiveSlug] = useState("machining")
   const [showHighlight, setShowHighlight] = useState(true)
 
@@ -77,6 +81,30 @@ export default function Header() {
         setAllPosts(posts)
       })
   }, [])
+
+  useEffect(() => {
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/events`)
+    .then(res => res.json())
+    .then(data => {
+      setEvents(Array.isArray(data) ? data : [])
+    })
+    .catch(err => console.error("Events fetch error:", err))
+}, [])
+
+useEffect(() => {
+  fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/suppliers?limit=4`)
+    .then(res => res.json())
+    .then(data => {
+      if (Array.isArray(data)) {
+        setSuppliers(data)
+      } else {
+        setSuppliers(data.data ?? [])
+      }
+    })
+    .catch(err => console.error("Suppliers fetch error:", err))
+}, [])
+
+
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "unset"
@@ -292,17 +320,18 @@ export default function Header() {
       </div>
 {/* ================= RED HIGHLIGHT STRIP ================= */}
 {showHighlight && !openMega && (
-  <div className="relative h-7 w-[80%] sm:w-[60%] md:w-[45%] lg:w-[28%] xl:w-[26%] 2xl:w-[15%] max-w-[420px]">
+  <div className="relative w-full h-7">
 
     {/* RED STRIP */}
-    <div className="absolute left-0 top-0 h-6 w-full bg-[#B30F24] flex items-center px-4 sm:px-6">
-      <span className="text-white text-xs sm:text-sm font-semibold truncate">
+    <div className="absolute left-0 top-0 h-6 bg-[#B30F24] flex items-center px-6 pr-12">
+
+      <span className="text-white text-xs sm:text-sm font-semibold whitespace-nowrap">
         What’s New and What Works in the World of Tooling
       </span>
-    </div>
 
-    {/* RIGHT SLANT (UNCHANGED) */}
-    <div className="absolute right-[-12px] top-0 h-6 w-6 bg-[#B30F24] skew-x-[-20deg]" />
+      {/* RIGHT SLANT */}
+      <div className="absolute right-[-20px] top-0 h-6 w-10 bg-[#B30F24] skew-x-[-20deg]" />
+    </div>
 
   </div>
 )}
@@ -338,37 +367,133 @@ XL	22% */}
               ))}
             </aside>
 
-            <div className="grid grid-cols-4 gap-6 h-full content-start">
-              {filteredPosts.map(post => (
-                <article key={post.id}>
-  <Link href={`/post/${post.slug}`}>
-    <div className="relative w-full h-40 mb-3">
-      <Image
-        src={post.imageUrl || "/placeholder.svg"}
-        alt={post.title}
-        fill
-        className="object-cover rounded hover:opacity-90 transition-opacity"
-        sizes="(max-width:1024px) 100vw, 25vw"
-      />
-    </div>
-  </Link>
+           <div className="grid grid-cols-4 gap-6 h-full content-start">
 
-  <h5 className="text-[10px] uppercase text-red-500 font-bold tracking-wide mb-1">
-    {post.badge}
-  </h5>
+{openMega === "resources" && activeSlug === "events" ? (
 
-  <h4 className="text-sm font-semibold text-white leading-snug hover:text-[#B30F24]">
-    <Link href={`/post/${post.slug}`}>
-      {post.title}
-    </Link>
-  </h4>
+  events.length === 0 ? (
+    <p className="text-white col-span-4">
+      No upcoming events available.
+    </p>
+  ) : (
+    events.slice(0, 4).map(event => (
+      <div key={event.id} className="text-white">
 
-  <p className="text-xs text-gray-300 mt-2 leading-relaxed line-clamp-2">
-    {post.excerpt}
-  </p>
-</article>
-              ))}
-            </div>
+        <Link href={`/events/${event.slug}`}>
+          <div className="bg-white rounded p-4 mb-3">
+            {event.logoUrl ? (
+              <Image
+                src={event.logoUrl}
+                alt={event.title}
+                width={200}
+                height={120}
+                className="object-contain mx-auto"
+              />
+            ) : (
+              <div className="h-24 bg-gray-100 flex items-center justify-center text-black">
+                No Image
+              </div>
+            )}
+          </div>
+        </Link>
+
+        <p className="text-xs text-gray-300 mb-1">
+          {new Date(event.startDate).toLocaleDateString()} –{" "}
+          {new Date(event.endDate).toLocaleDateString()}
+        </p>
+
+        <h4 className="text-sm font-semibold hover:text-[#B30F24]">
+          <Link href={`/events/${event.slug}`}>
+            {event.title}
+          </Link>
+        </h4>
+
+        {event.location && (
+          <p className="text-xs text-gray-400 mt-1">
+            📍 {event.location}
+          </p>
+        )}
+
+      </div>
+    ))
+  )
+
+) : openMega === "resources" && activeSlug === "suppliers" ? (
+
+  suppliers.length === 0 ? (
+    <p className="text-white col-span-4">
+      No suppliers available.
+    </p>
+  ) : (
+    suppliers.slice(0, 4).map(supplier => (
+      <div key={supplier.id} className="text-white">
+
+        <Link href={`/suppliers/${supplier.slug}`}>
+          <div className="bg-white rounded p-4 mb-3">
+            {supplier.logoUrl ? (
+              <Image
+                src={supplier.logoUrl}
+                alt={supplier.name}
+                width={200}
+                height={120}
+                className="object-contain mx-auto"
+              />
+            ) : (
+              <div className="h-24 bg-gray-100 flex items-center justify-center text-black">
+                No Image
+              </div>
+            )}
+          </div>
+        </Link>
+
+        <h4 className="text-sm font-semibold hover:text-[#B30F24]">
+          <Link href={`/suppliers/${supplier.slug}`}>
+            {supplier.name}
+          </Link>
+        </h4>
+
+        <p className="text-xs text-gray-300 mt-2 line-clamp-2">
+          {supplier.description}
+        </p>
+
+      </div>
+    ))
+  )
+
+) : (
+
+  filteredPosts.map(post => (
+    <article key={post.id}>
+      <Link href={`/post/${post.slug}`}>
+        <div className="relative w-full h-40 mb-3">
+          <Image
+            src={post.imageUrl || "/placeholder.svg"}
+            alt={post.title}
+            fill
+            className="object-cover rounded hover:opacity-90 transition-opacity"
+          />
+        </div>
+      </Link>
+
+      <h5 className="text-[10px] uppercase text-red-500 font-bold tracking-wide mb-1">
+        {post.badge}
+      </h5>
+
+      <h4 className="text-sm font-semibold text-white leading-snug hover:text-[#B30F24]">
+        <Link href={`/post/${post.slug}`}>
+          {post.title}
+        </Link>
+      </h4>
+
+      <p className="text-xs text-gray-300 mt-2 leading-relaxed line-clamp-2">
+        {post.excerpt}
+      </p>
+    </article>
+  ))
+
+)}
+
+</div>
 
           </div>
         </div>
